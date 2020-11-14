@@ -1,0 +1,43 @@
+server:
+  port: 8017
+#zuul:
+##  #第一步配置路由规则
+#  routes:
+#    user-service: /user/**
+#  ignored-services:
+#    # - 集合元素
+#    - consumer-service
+#    hehe:
+#      path: /user-service/**
+#      serviceId: user-service
+#      url: http://localhost:8101
+
+
+zuul:
+#  #第一步配置路由规则
+  routes:
+    user-service:  /user/**
+#  strip-prefix: false
+eureka:
+  client:
+    service-url:
+      defaultZone: http://188.188.2.113:9102/eureka,http://188.188.2.113:9100/eureka
+
+spring:
+  application:
+    name: gateway-server
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 6000
+ribbon:
+  # 500ms没有建立连接，抛出异常
+  ConnectTimeout: 500
+  #超过两秒没有读取数据，抛出异常
+  ReadTimeout: 4000
+  MaxAutoRetriesNextServer: 0 #不重试
+
+  #ribbon的超时时长,其实是(read+connect)*2，必须小于hystrix时长

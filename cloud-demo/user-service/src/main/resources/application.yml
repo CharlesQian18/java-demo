@@ -1,0 +1,16 @@
+server:
+  port: 8101
+spring:
+  application:
+    name: user-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/test-basedata
+    username: root
+    password: 1
+    driver-class-name: com.mysql.jdbc.Driver
+mybatis:
+  type-aliases-package: com.sharpnew.user.pojo
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8017/eureka

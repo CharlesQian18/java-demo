@@ -1,0 +1,4 @@
+spring:
+  elasticsearch:
+    rest:
+      uris:  http://188.188.2.113:9320

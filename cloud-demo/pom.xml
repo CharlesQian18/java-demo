@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.sharpnew.demo</groupId>
+  <artifactId>cloud-demo</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.2.5.RELEASE</version>
+    <!--设定一个空值将始终从仓库中获取，不从本地路径获取-->
+    <relativePath/>
+  </parent>
+
+  <modules>
+    <module>user-service</module>
+    <module>consumer-demo</module>
+    <module>eureka-server</module>
+    <module>gateway</module>
+  </modules>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <java.version>1.8</java.version>
+    <spring-cloud.version>Hoxton.SR4</spring-cloud.version>
+    <mapper.starter.version>2.0.3</mapper.starter.version>
+    <mysql.version>5.1.47</mysql.version>
+  </properties>
+
+  <!--子工程不继承，如果引用要声明不指定版本，可以使用父工程的版本-->
+  <dependencyManagement>
+    <dependencies>
+      <!--spring-Cloud-->
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <!--版本管理-->
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>${spring-cloud.version}</version>
+        <type>pom</type>
+        <!--scope定义了类包在项目的使用阶段。项目阶段包括： 编译，运行，测试和发布-->
+        <scope>import</scope>
+      </dependency>
+      <!--通用的Mapper启动器-->
+      <dependency>
+        <groupId>tk.mybatis</groupId>
+        <artifactId>mapper-spring-boot-starter</artifactId>
+        <version>${mapper.starter.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>${mysql.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

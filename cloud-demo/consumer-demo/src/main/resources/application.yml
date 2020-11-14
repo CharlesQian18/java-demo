@@ -1,0 +1,31 @@
+server:
+  port: 8102
+spring:
+  application:
+    name: consumer-service
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8103/eureka,http://127.0.0.1:8106/eureka
+    # 拉取服务列表 默认为30
+    registry-fetch-interval-seconds: 30
+
+#feign 需要配置--start
+ribbon:
+  # 500ms没有建立连接，抛出异常
+  connectionTimeOut: 500
+  #超过两秒没有读取数据，抛出异常
+  ReadTimeOut: 2000
+#开启熔断器
+feign:
+  hystrix:
+    enabled: true
+#feign 需要配置--end
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000

@@ -1,0 +1,6 @@
+spring:
+  rabbitmq:
+    host: 188.188.3.19
+    username: intell
+    password: intell
+    virtual-host: intell

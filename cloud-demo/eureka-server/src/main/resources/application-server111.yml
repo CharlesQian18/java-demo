@@ -1,0 +1,23 @@
+server:
+  port: 9111
+spring:
+  application:
+    name: eureka-server
+eureka:
+  client:
+    service-url:
+      defaultZone: http://188.188.2.112:9112/eureka
+    register-with-eureka: true # 当然这个默认就是true，表示向eureka注册自己
+    fetch-registry: true # 这个的意思是从eureka server拉取注册表，集群中从相邻的eureka server拉取注册表
+  instance:
+    # 最小维持心跳的时间，默认30S
+    lease-renewal-interval-in-seconds: 30
+    # 最小的失效时间，默认90s
+    lease-expiration-duration-in-seconds: 90
+    prefer-ip-address: true
+    #ip-address: 192.168.1.1 #强制指定IP地址，默认会获取本机的IP地址
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    hostname: ${spring.cloud.client.ip-address}
+#  server:
+#    # 默认60S
+#    eviction-interval-timer-in-ms: 30000
